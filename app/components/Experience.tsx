@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 interface ExperienceCard {
   id: number;
@@ -37,13 +40,23 @@ export default function Experience(): React.JSX.Element {
   return (
     <section id="experience" className="py-20 px-6">
       <div className="container mx-auto max-w-5xl">
-        <h2 className="text-4xl lg:text-5xl font-bold text-white mb-10 text-center">
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-4xl lg:text-5xl font-bold text-white mb-10 text-center"
+        >
           Work Experience
-        </h2>
+        </motion.h2>
 
-        {experienceCards.map((card) => (
-          <div
+        {experienceCards.map((card, index) => (
+          <motion.div
             key={card.id}
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: index * 0.15 }}
+            viewport={{ once: true, amount: 0.3 }}
             className="bg-gradient-to-r from-slate-950 via-purple-950 to-slate-950 backdrop-blur-md rounded-2xl p-8 lg:p-10 border-t-4 border-purple-700 shadow-2xl hover:shadow-purple-900 transition-all"
           >
             <div className="flex flex-col lg:flex-row gap-6 lg:gap-10">
@@ -60,7 +73,6 @@ export default function Experience(): React.JSX.Element {
                   {card.title}
                 </h3>
 
-                {/* Badges */}
                 <div className="flex flex-wrap items-center gap-2 mt-2">
                   <span className="px-3 py-1 rounded-full bg-purple-900/40 border border-purple-500/40 text-purple-200 text-xs">
                     {card.workType}
@@ -71,12 +83,13 @@ export default function Experience(): React.JSX.Element {
                   </span>
                 </div>
 
-                {/* Duration — right under location */}
                 <p className="text-white/60 text-sm mt-2 mb-4">
                   {card.duration}
                 </p>
 
-                <p className="text-white/85 text-sm mb-4">{card.description}</p>
+                <p className="text-white/85 text-sm mb-4">
+                  {card.description}
+                </p>
 
                 <ul className="text-white/75 text-sm space-y-2 mb-4 list-disc pl-5">
                   {card.bullets.map((item, i) => (
@@ -89,7 +102,7 @@ export default function Experience(): React.JSX.Element {
                 </p>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>

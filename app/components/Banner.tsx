@@ -1,17 +1,26 @@
 "use client";
 
 import Image from "next/image";
-export default function Banner(): React.JSX.Element {
+import { motion } from "framer-motion";
 
+export default function Banner(): React.JSX.Element {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center  px-6"
+      className="min-h-screen flex items-center justify-center px-6"
     >
       <div className="container mx-auto max-w-6xl">
-        <div className="flex flex-col lg:flex-row items-center ">
-          <div className="flex justify-center lg:justify-end relative w-full lg:w-auto">
+        <div className="flex flex-col lg:flex-row items-center gap-10">
+
+          {/* IMAGE SIDE */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7 }}
+            className="flex justify-center lg:justify-end relative"
+          >
             <div className="relative top-10">
+
               <div className="lg:hidden -top-150 z-10">
                 <div className="relative inline-block ">
                   <Image
@@ -53,9 +62,15 @@ export default function Banner(): React.JSX.Element {
                 priority
               />
             </div>
-          </div>
+          </motion.div>
 
-          <div className="flex-1 space-y-6 text-center lg:text-left">
+          {/* TEXT SIDE */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="flex-1 space-y-6 text-center lg:text-left"
+          >
             <div className="hidden lg:inline-block relative">
               <Image
                 src="/assets/arrow.png"
@@ -101,20 +116,8 @@ export default function Banner(): React.JSX.Element {
                 React, Next.js and modern web tools.
               </p>
             </div>
-          </div>
+          </motion.div>
         </div>
-
-        {/* <div className="space-y-3 pt-15 text-center lg:text-left">
-          <p className="text-5xl text-white font-bold">
-            I&apos;m a {displayedText}
-            <span className="animate-pulse">|</span>
-          </p>
-
-          <p className="text-lg text-white/80 max-w-2xl mt-15 mx-auto lg:mx-0">
-            Passionate about creating clean UI, writing readable code, and
-            continuously improving my frontend skills.
-          </p>
-        </div> */}
       </div>
     </section>
   );

@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 interface Project {
   id: number;
@@ -39,17 +42,26 @@ export default function Projects(): React.JSX.Element {
   return (
     <section id="projects" className="py-20 px-6">
       <div className="container mx-auto max-w-7xl">
+
         {featuredProjects.map((project, index) => {
           const isEven = index % 2 === 1;
 
           return (
-            <div key={project.id} className="mb-20 last:mb-0">
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.15 }}
+              viewport={{ once: true, amount: 0.3 }}
+              className="mb-20 last:mb-0"
+            >
               <div
                 className={`relative grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center ${
                   isEven ? "lg:grid-flow-dense" : ""
                 }`}
               >
-                {/* Text */}
+
+                {/* TEXT */}
                 <div className={`${isEven ? "lg:col-start-2" : ""}`}>
                   <p className="text-purple-400 text-lg lg:text-xl mb-2 font-medium">
                     Featured Project
@@ -85,11 +97,13 @@ export default function Projects(): React.JSX.Element {
                   )}
                 </div>
 
-                {/* Image */}
-                <div
-                  className={`${isEven ? "lg:col-start-1 lg:row-start-1" : ""}`}
-                >
-                  <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-slate-950 p-2 lg:p-3 shadow-2xl">
+                {/* IMAGE */}
+                <div className={`${isEven ? "lg:col-start-1 lg:row-start-1" : ""}`}>
+                  <motion.div
+                    whileHover={{ scale: 1.03 }}
+                    transition={{ duration: 0.25 }}
+                    className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-slate-950 p-2 lg:p-3 shadow-2xl"
+                  >
                     <div className="relative w-full h-full rounded-lg overflow-hidden">
                       <Image
                         src={project.image}
@@ -99,10 +113,11 @@ export default function Projects(): React.JSX.Element {
                         className="object-cover"
                       />
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
+
               </div>
-            </div>
+            </motion.div>
           );
         })}
       </div>
