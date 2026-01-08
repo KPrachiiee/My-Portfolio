@@ -11,7 +11,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Prachi Kshirsagar — Frontend Developer",
+  title: "Prachi Kshirsagar - Portfolio",
   description:
     "Frontend Developer passionate about building responsive, user-friendly web applications using React, Next.js and modern web technologies.",
 };
